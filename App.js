@@ -23,9 +23,15 @@ export default function App() {
 
   useEffect(() => {
     fetch(
-      "https://weather-app-server-ehth.onrender.com/api/weather?cityName=Manila",
-    );
-  });
+      `https://weather-app-server-ehth.onrender.com/api/weather?cityName=Manila`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Weather data:", data);
+        setWeather(data);
+      })
+      .catch((err) => console.log("Fetch error:", err));
+  }, []);
 
   if (!loaded) return null;
 
@@ -35,7 +41,7 @@ export default function App() {
         <TopNavBar />
 
         <ScrollView style={styles.content}>
-          {currentScreen === "Home" && <HomeScreen />}
+          {currentScreen === "Home" && <HomeScreen weather={weather} />}
           {currentScreen === "Outlook" && <OutlookScreen />}
           {currentScreen === "Saved" && <SavedScreen />}
           {currentScreen === "Settings" && <SettingsScreen />}
