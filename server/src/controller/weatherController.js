@@ -17,4 +17,4 @@ const weatherController = {
   },
 };
 
-module.exports = { weatherController, searchCities };
+module.exports = weatherController;
