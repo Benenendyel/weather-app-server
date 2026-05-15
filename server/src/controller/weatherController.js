@@ -8,12 +8,13 @@ const weatherController = {
     res.json(data);
   },
 
-  async searchCities(query) {
+  async searchCities(req, res) {
+    const query = req.query.q;
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=YOUR_API_KEY`,
+      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.WEATHERMAP_API_KEY}`,
     );
     const data = await response.json();
-    return data;
+    res.json(data);
   },
 };
 
